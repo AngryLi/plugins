@@ -80,6 +80,13 @@
     [self applySettings:settings];
     // TODO(amirh): return an error if apply settings failed once it's possible to do so.
     // https://github.com/flutter/flutter/issues/36228
+      
+      
+    // 修复 iOS 13 上滑动进度条随便乱跑的问题
+    if (@available(iOS 13.0, *)) {
+        _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _webView.scrollView.automaticallyAdjustsScrollIndicatorInsets = NO;
+    }
 
     NSString* initialUrl = args[@"initialUrl"];
     if ([initialUrl isKindOfClass:[NSString class]]) {
